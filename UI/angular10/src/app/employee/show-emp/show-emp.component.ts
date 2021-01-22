@@ -20,6 +20,7 @@ export class ShowEmpComponent implements OnInit {
     this.refreshEmpList();
   }
 
+
   addClick(){
     this.emp={
       EmployeeId:0,
@@ -35,7 +36,6 @@ export class ShowEmpComponent implements OnInit {
 
   editClick(item:any){
     this.emp=item;
-    console.log(this.emp);
     this.ModalTitle="Edit Employee";
     this.ActivateAddEditEmpComp=true;
   }

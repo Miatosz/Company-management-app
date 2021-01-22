@@ -1,5 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { empty, from } from 'rxjs';
 import {SharedService} from 'src/app/shared.service';
+import {ShowEmpComponent} from 'src/app/employee/show-emp/show-emp.component';
 
 @Component({
   selector: 'app-add-edit-emp',
@@ -8,7 +10,7 @@ import {SharedService} from 'src/app/shared.service';
 })
 export class AddEditEmpComponent implements OnInit {
 
-  constructor(private service:SharedService) { }
+  constructor(private service:SharedService, private showEmpComponent: ShowEmpComponent) { }
 
   @Input() emp:any;
   EmployeeId:string="";
@@ -18,10 +20,7 @@ export class AddEditEmpComponent implements OnInit {
   PhotoFileName:string="";
   PhotoFilePath:string="";
 
-
-  // type: {id:number, name:string}[] = [
-  //   {"id":0, "name":"ab"}
-  // ];
+  url = this.showEmpComponent.emp;
 
   DepartmentsList: Array<{ Id: number, Name: string }> = []
 
@@ -59,15 +58,26 @@ export class AddEditEmpComponent implements OnInit {
     });
   }
 
-  updateEmployee(id:any){
+  updateEmployee(emp:any){
+    if (this.EmployeeName == null){
+      this.EmployeeName = emp.Name;
+    }
+    // if (this.Department == null){
+    //   this.Department = emp.Department;
+    // }
+    if (this.DateOfJoining == undefined || null){
+      this.DateOfJoining = emp.DateOfJoin;
+    }
     
-    var val = { Id:id,
+    var val = { Id:emp.Id,
                 Name:this.EmployeeName,
                 Department:this.DepartmentsList.find(i => i.Name === this.Department),
                 DepartmentId:this.DepartmentsList.find(i => i.Name === this.Department)?.Id,
                 DateOfJoin:this.DateOfJoining,
                 PhotoFileName:this.PhotoFileName};
-console.log(id);
+    console.log(this.Department);
+
+
     this.service.updateEmployee(val).subscribe(res=>{
     alert(res.toString());
     });

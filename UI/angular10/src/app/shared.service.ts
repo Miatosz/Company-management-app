@@ -39,7 +39,7 @@ readonly PhotoUrl = "http://localhost:5000/Photos/";
   }
 
   updateEmployee(val:any){
-    console.log(val.Id);
+    console.log(val);
     return this.http.put(this.APIUrl+'/Employee',val);
   }
 

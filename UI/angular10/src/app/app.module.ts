@@ -31,7 +31,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SharedService],
+  providers: [SharedService, ShowEmpComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
